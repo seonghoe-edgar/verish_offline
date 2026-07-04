@@ -8,6 +8,7 @@
     "test-gets": "tsx src/test-all-gets.ts",
     "test-mash": "tsx src/test-mash-connection.ts",
     "test-slack": "tsx src/test-slack-connection.ts",
+    "test-shopify": "tsx src/test-shopify-connection.ts",
     "country-report": "tsx src/report/country-comparison.ts",
     "collect-voc": "tsx src/report/collect-store-voc.ts",
     "kpi-digest": "tsx src/report/daily-kpi-digest.ts",

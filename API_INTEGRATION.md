@@ -207,6 +207,46 @@ MCP 커넥터가 기본 제공하는 도구:
 
 별도 스크립트/설치 불필요 — 세션 내에서 바로 `mcp__*__get-shop-info`, `mcp__*__search_products` 등 도구를 호출하면 된다.
 
+## 3.5 직접 API 클라이언트 — "Verish Analytics" 커스텀 앱 (2026-07-05 추가)
+
+MCP 커넥터의 ShopifyQL(`run-analytics-query`)은 `sessions` 테이블에서 `product_title`,
+`product_views`, `add_to_carts`, `checkouts` 같은 상품 단위 세부 컬럼을 사용할 수 없다
+(권한 문제로 추정해 자체 앱을 만들어봤으나 동일하게 막힘 — 아래 "알려진 한계" 참고).
+그 외의 용도(주문/매출/상품을 MCP 도구보다 자유로운 ShopifyQL로 직접 쿼리)로는 정상 동작해서
+PLAY MD/mAsh와 같은 패턴으로 별도 클라이언트를 만들어뒀다.
+
+**앱 생성 경로**: Shopify는 최근 정책 변경으로 Admin 화면(옛 "Develop apps")에서 새 커스텀
+앱을 만들 수 없고, **Dev Dashboard**(dev.shopify.com/dashboard, Deepdive Inc. 조직)에서
+"Verish Analytics"라는 이름으로 생성. Admin API scopes: `read_orders`, `read_products`,
+`read_reports`. verishshop.com(=verish-int) 스토어에 설치 완료.
+
+**인증 방식**: client credentials grant (OAuth 2.0) — 앱과 스토어가 같은 Shopify
+조직에 있어야 동작. 정적 토큰을 한 번 발급받는 방식이 아니라, 요청마다
+`POST https://{shop}.myshopify.com/admin/oauth/access_token`으로 Client ID/Secret을
+보내 24시간짜리 액세스 토큰을 받는다 (`src/shopify/client.ts`가 만료 60초 전에 자동 재발급).
+
+| 항목 | 값 |
+|---|---|
+| API 버전 | 2026-04 |
+| 자격 증명 | `.env`의 `SHOPIFY_SHOP`, `SHOPIFY_CLIENT_ID`, `SHOPIFY_CLIENT_SECRET`, `SHOPIFY_API_VERSION` |
+| 클라이언트 | [src/shopify/client.ts](src/shopify/client.ts) — `shopifyGraphql()`, `runShopifyQl()` |
+| 테스트 | `npm run test-shopify` |
+
+**알려진 한계 — 상품별 노출수(product views)는 API로 불가능.** `read_reports` 권한을
+가진 이 전용 앱으로 아래를 시도했으나 둘 다 동일하게 실패:
+
+```
+FROM sessions SHOW sessions, product_views, add_to_carts, checkouts, orders
+GROUP BY product_title ...
+→ Column Not Found: product_views, add_to_carts, checkouts, product_title, orders
+```
+
+반면 `FROM sessions GROUP BY day`(시간 단위)와 `FROM sales GROUP BY product_title`(매출
+단위)는 정상 동작한다. 즉 권한 부족이 아니라 **Shopify가 세션↔상품 단위 조인을 공개
+GraphQL API 자체에서 제공하지 않는 플랫폼 제약**이다 (Shopify 공식 문서엔 이 쿼리 예시가
+있지만 실제로는 Admin 내장 Analytics 리포트 전용 기능으로 보임). 상품별 실제 노출수·전환율이
+필요하면 Shopify Admin → Analytics → Reports에서 수동 확인만 가능하다.
+
 ---
 
 # 4부. Slack (매장 오픈마감보고 정성 데이터)
