@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+
+# machine-local settings / runtime state — not meant to sync across PCs
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# generated reports contain real sales/VOC/safety-incident data — regenerate per machine, don't version
+reports/

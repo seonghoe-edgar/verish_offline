@@ -1,0 +1,25 @@
+{
+  "name": "playmd-api-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test-connection": "tsx src/test-connection.ts",
+    "test-gets": "tsx src/test-all-gets.ts",
+    "test-mash": "tsx src/test-mash-connection.ts",
+    "test-slack": "tsx src/test-slack-connection.ts",
+    "country-report": "tsx src/report/country-comparison.ts",
+    "collect-voc": "tsx src/report/collect-store-voc.ts",
+    "kpi-digest": "tsx src/report/daily-kpi-digest.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "@types/node": "^22.10.5"
+  }
+}
