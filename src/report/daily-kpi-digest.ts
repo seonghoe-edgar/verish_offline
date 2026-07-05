@@ -165,6 +165,20 @@ function fmtPct(change: number | null): string {
   return `${sign}${(change * 100).toFixed(1)}%`;
 }
 
+// 전환율은 그 자체가 비율(%)이라 "전주 대비 상대 증감률(%)"로 보여주면 %의 %라 헷갈린다.
+// 절대 %p 차이를 bps 단위로 보여준다(1%p = 100bps). 예: 13.4% -> 16.8%면 +340bps.
+// ⚠️ 플래그 판정 기준(THRESHOLDS.conversionRate)은 그대로 상대 증감률 기준을 유지한다 — 표시 단위만 바뀐 것.
+function bpsChange(cur: number | null, prev: number | null): number | null {
+  if (cur === null || prev === null) return null;
+  return (cur - prev) * 10000;
+}
+
+function fmtBps(bps: number | null): string {
+  if (bps === null) return "N/A";
+  const sign = bps >= 0 ? "+" : "";
+  return `${sign}${Math.round(bps)}bps`;
+}
+
 async function main() {
   const compareDate = sameWeekdayLastWeek(TARGET);
   console.log(`대상일: ${TARGET} vs 전주 동요일: ${compareDate}`);
@@ -190,13 +204,14 @@ async function main() {
     totalPaymentPrev += p.paymentAmount;
 
     const visitChange = pctChange(c.visitors, p.visitors);
-    const convChange = pctChange(c.conversionRate, p.conversionRate);
+    const convChangeRel = pctChange(c.conversionRate, p.conversionRate); // 플래그 판정용(상대 증감률)
+    const convBps = bpsChange(c.conversionRate, p.conversionRate); // 표시용(절대 %p 차이)
     const aovChange = pctChange(c.aov, p.aov);
     const payChange = pctChange(c.paymentAmount, p.paymentAmount);
 
     rows.push(
       `| ${label} | ${c.visitors.toLocaleString()} (${fmtPct(visitChange)}${flag(visitChange, THRESHOLDS.visitors)}) ` +
-        `| ${c.conversionRate ? (c.conversionRate * 100).toFixed(1) + "%" : "N/A"} (${fmtPct(convChange)}${flag(convChange, THRESHOLDS.conversionRate)}) ` +
+        `| ${c.conversionRate ? (c.conversionRate * 100).toFixed(1) + "%" : "N/A"} (${fmtBps(convBps)}${flag(convChangeRel, THRESHOLDS.conversionRate)}) ` +
         `| ${c.aov ? Math.round(c.aov).toLocaleString() + "원" : "N/A"} (${fmtPct(aovChange)}${flag(aovChange, THRESHOLDS.aov)}) ` +
         `| ${c.paymentAmount.toLocaleString()}원 (${fmtPct(payChange)}${flag(payChange, THRESHOLDS.paymentAmount)}) |`
     );
@@ -214,7 +229,7 @@ async function main() {
   console.log(
     "전환율:",
     totalConvCur ? (totalConvCur * 100).toFixed(1) + "%" : "N/A",
-    `(${fmtPct(pctChange(totalConvCur, totalConvPrev))})`
+    `(${fmtBps(bpsChange(totalConvCur, totalConvPrev))})`
   );
   console.log(
     "객단가:",
