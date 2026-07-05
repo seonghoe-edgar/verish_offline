@@ -9,18 +9,22 @@
     "test-mash": "tsx src/test-mash-connection.ts",
     "test-slack": "tsx src/test-slack-connection.ts",
     "test-shopify": "tsx src/test-shopify-connection.ts",
+    "test-ga4": "tsx src/test-ga4-connection.ts",
     "country-report": "tsx src/report/country-comparison.ts",
     "collect-voc": "tsx src/report/collect-store-voc.ts",
     "kpi-digest": "tsx src/report/daily-kpi-digest.ts",
+    "shopify-bot": "tsx src/shopify-bot/index.ts",
     "build": "tsc"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
+    "@slack/bolt": "^4.7.3",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
+    "@types/node": "^22.10.5",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.3",
-    "@types/node": "^22.10.5"
+    "typescript": "^5.7.3"
   }
 }
