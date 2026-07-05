@@ -14,13 +14,15 @@
     "collect-voc": "tsx src/report/collect-store-voc.ts",
     "kpi-digest": "tsx src/report/daily-kpi-digest.ts",
     "shopify-bot": "tsx src/shopify-bot/index.ts",
+    "shopify-web": "tsx src/shopify-web/server.ts",
     "build": "tsc"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",
     "@slack/bolt": "^4.7.3",
     "axios": "^1.7.9",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "express": "^5.2.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
