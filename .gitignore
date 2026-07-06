@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .env
+credentials/
 
 # machine-local settings / runtime state — not meant to sync across PCs
 .claude/settings.local.json
