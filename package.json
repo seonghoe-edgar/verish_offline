@@ -12,6 +12,7 @@
     "test-ga4": "tsx src/test-ga4-connection.ts",
     "country-report": "tsx src/report/country-comparison.ts",
     "collect-voc": "tsx src/report/collect-store-voc.ts",
+    "voc-for-date": "tsx src/report/voc-for-date.ts",
     "kpi-digest": "tsx src/report/daily-kpi-digest.ts",
     "shopify-bot": "tsx src/shopify-bot/index.ts",
     "shopify-web": "tsx src/shopify-web/server.ts",
