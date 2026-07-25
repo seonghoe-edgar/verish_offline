@@ -49,11 +49,14 @@ rows_a = [
     ("프로모션 시작", date(2026, 8, 10), ""),
     ("프로모션 종료", date(2026, 8, 23), ""),
     ("프로모션 업리프트 배수", 1.8, "\"매출 180%로 업리프트\" = 평시 대비 1.8배로 해석"),
+    ("미국 매출(USD, 기준기간)", 1285765.44, "ShopifyQL: FROM sales SHOW total_sales GROUP BY billing_country, 6/1~7/24"),
+    ("전체 매출(USD, 기준기간)", 3858590.78, "같은 쿼리의 전체 합계 (요일비중 산출과 동일 기간/데이터)"),
 ]
 for r in rows_a:
     ws_a.append(list(r))
 
-for i, r in enumerate(range(2, 2 + len(rows_a)), start=0):
+n_base_rows = len(rows_a)
+for i, r in enumerate(range(2, 2 + n_base_rows), start=0):
     ws_a.cell(row=r, column=1).font = BLACK
     val_cell = ws_a.cell(row=r, column=2)
     val_cell.font = BLUE
@@ -64,9 +67,17 @@ for i, r in enumerate(range(2, 2 + len(rows_a)), start=0):
     if isinstance(rows_a[i][1], date):
         val_cell.number_format = DATE_FMT
     elif rows_a[i][0].endswith("매출") or "원화" in rows_a[i][0]:
-        val_cell.number_format = WON_FMT
+        val_cell.number_format = WON_FMT if "원화" in rows_a[i][0] else USD_FMT
     elif "배수" in rows_a[i][0]:
         val_cell.number_format = "0.0\"x\""
+
+us_share_row = 2 + n_base_rows
+ws_a.cell(row=us_share_row, column=1, value="미국 비중(%)").font = BLACK
+us_share_cell = ws_a.cell(row=us_share_row, column=2, value="=B8/B9")
+us_share_cell.font = BLACK
+us_share_cell.number_format = PCT_FMT
+ws_a.cell(row=us_share_row, column=3, value="같은 기준기간 미국/전체 매출 비율을 8월 전 기간에 동일하게 적용 (요일별로 따로 나누지 않음)").font = BLACK
+ws_a.cell(row=us_share_row, column=3).alignment = Alignment(wrap_text=True, vertical="top")
 
 autofit(ws_a, [32, 16, 70])
 ws_a.freeze_panes = "A2"
@@ -134,8 +145,8 @@ ws_w.freeze_panes = "A2"
 
 # ---------------- 일별배분 ----------------
 ws_d = wb.create_sheet("일별배분")
-ws_d.append(["날짜", "요일번호", "요일", "구간", "업리프트 배수", "기준지수(요일 평균매출,USD)", "조정지수", "배분금액(원)"])
-style_header(ws_d, 1, 8)
+ws_d.append(["날짜", "요일번호", "요일", "구간", "업리프트 배수", "기준지수(요일 평균매출,USD)", "조정지수", "배분금액(원)", "미국 비중(%)", "미국 배분금액(원)", "미국외 배분금액(원)"])
+style_header(ws_d, 1, 11)
 
 start = date(2026, 8, 1)
 n_days = 31
@@ -175,11 +186,24 @@ for i in range(n_days):
     c8.font = BLACK
     c8.number_format = WON_FMT
 
+    us_share_cell = ws_d.cell(row=row, column=9, value="=가정!$B$10")
+    us_share_cell.font = BLACK
+    us_share_cell.number_format = PCT_FMT
+
+    us_amt_cell = ws_d.cell(row=row, column=10, value=f"=ROUND(H{row}*I{row},0)")
+    us_amt_cell.font = BLACK
+    us_amt_cell.number_format = WON_FMT
+
+    non_us_amt_cell = ws_d.cell(row=row, column=11, value=f"=H{row}-J{row}")
+    non_us_amt_cell.font = BLACK
+    non_us_amt_cell.number_format = WON_FMT
+
 sum_row = last_row + 1
 ws_d.cell(row=sum_row, column=3, value="합계").font = BOLD
-tot_cell = ws_d.cell(row=sum_row, column=8, value=f"=SUM(H{first_row}:H{last_row})")
-tot_cell.font = BOLD
-tot_cell.number_format = WON_FMT
+for col in (8, 10, 11):
+    tot_cell = ws_d.cell(row=sum_row, column=col, value=f"=SUM({get_column_letter(col)}{first_row}:{get_column_letter(col)}{last_row})")
+    tot_cell.font = BOLD
+    tot_cell.number_format = WON_FMT
 
 check_row = sum_row + 1
 ws_d.cell(row=check_row, column=3, value="목표 대비 차액(검증, 0이어야 함)").font = BLACK
@@ -199,7 +223,7 @@ p2 = ws_d.cell(row=rest_row, column=8, value=f'=SUMIF($D${first_row}:$D${last_ro
 p2.font = BLACK
 p2.number_format = WON_FMT
 
-autofit(ws_d, [14, 10, 8, 12, 12, 22, 16, 18])
+autofit(ws_d, [14, 10, 8, 12, 12, 22, 16, 18, 12, 18, 20])
 ws_d.freeze_panes = "A2"
 
 wb._sheets = [ws_a, ws_d, ws_w, ws_r]
