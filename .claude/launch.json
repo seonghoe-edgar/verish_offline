@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "port": 3400
+    },
+    {
+      "name": "static-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:\\Users\\DEEPDIVE\\AppData\\Local\\Temp\\claude\\C--Users-DEEPDIVE-Desktop-projects-online\\556c4155-2659-4c31-a017-b5981d9542f5\\scratchpad\\static-serve.mjs"],
+      "port": 3401
+    }
+  ]
+}

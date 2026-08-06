@@ -1,0 +1,20 @@
+{
+  "name": "verish-competitive-diagnostic",
+  "version": "0.1.0",
+  "description": "Verish 모바일 홈/PDP 경쟁사 구조·전환 진단 리포트 생성 도구",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "verish-analyze": "./bin/analyze.mjs"
+  },
+  "scripts": {
+    "analyze": "node bin/analyze.mjs",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.32.0"
+  }
+}
