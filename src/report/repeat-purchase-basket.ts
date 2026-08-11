@@ -44,16 +44,21 @@ async function fetchAllOrders(from: string, to: string): Promise<OrderLite[]> {
   return out;
 }
 
-interface LineItem { title: string; quantity: number; variantTitle: string | null; productType: string | null }
+interface LineItem { title: string; quantity: number; variantTitle: string | null; productType: string | null; paidTotal: number }
 const NODES_QUERY = `
 query Nodes($ids: [ID!]!) {
   nodes(ids: $ids) {
     ... on Order {
       id
-      lineItems(first: 15) { edges { node { title quantity variantTitle product { productType } } } }
+      lineItems(first: 15) {
+        edges { node { title quantity variantTitle product { productType } discountedTotalSet { shopMoney { amount } } } }
+      }
     }
   }
 }`;
+// 증정품(GWP) 제외: 자동할인으로 결제금액이 0원이 된 라인은 "구매"가 아니라 사은품이므로
+// 장바구니 구성 통계(개수/카테고리믹스/상품랭킹)에서 뺀다. 상품명이 아니라 실결제액(discountedTotalSet)
+// 기준으로 판별 — 같은 상품이 정가로 결제된 경우(사은품 조건 미달)는 그대로 구매로 집계.
 async function fetchLineItems(ids: string[]): Promise<Map<string, LineItem[]>> {
   const map = new Map<string, LineItem[]>();
   for (let i = 0; i < ids.length; i += 200) {
@@ -61,9 +66,16 @@ async function fetchLineItems(ids: string[]): Promise<Map<string, LineItem[]>> {
     const data: any = await shopifyGraphql(NODES_QUERY, { ids: batch });
     for (const n of data.nodes) {
       if (!n) continue;
-      map.set(n.id, n.lineItems.edges.map((e: any) => ({
-        title: e.node.title, quantity: e.node.quantity, variantTitle: e.node.variantTitle, productType: e.node.product?.productType ?? "기타",
-      })));
+      const items: LineItem[] = n.lineItems.edges
+        .map((e: any) => ({
+          title: e.node.title,
+          quantity: e.node.quantity,
+          variantTitle: e.node.variantTitle,
+          productType: e.node.product?.productType ?? "기타",
+          paidTotal: Number(e.node.discountedTotalSet?.shopMoney?.amount ?? 0),
+        }))
+        .filter((li: LineItem) => li.paidTotal > 0); // 증정품(실결제 0원) 제외
+      map.set(n.id, items);
     }
   }
   return map;
