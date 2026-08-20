@@ -1,0 +1,13 @@
+[
+  {
+    "weekStart": "2026-08-10",
+    "weekEnd": "2026-08-16",
+    "sessions": 302540,
+    "validOrders": 5979,
+    "conversionRate": 1.976,
+    "revenue": 407803466,
+    "aov": 68206,
+    "avgAddCartRate": 9.75,
+    "avgPurchaseRate": 3.55
+  }
+]

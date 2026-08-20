@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .env
+.env.local
+.next/
 credentials/
 
 # machine-local settings / runtime state — not meant to sync across PCs
