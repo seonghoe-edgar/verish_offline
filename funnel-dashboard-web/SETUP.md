@@ -33,11 +33,16 @@ npm run dev
 
 ## 3. Vercel 배포
 
-1. `verish_offline` 레포를 GitHub에 push (이미 origin이 설정돼 있음).
-2. [vercel.com](https://vercel.com) → GitHub 계정으로 로그인 → **Add New Project** → 이 레포 선택.
+`verish_offline` 로컬 저장소와 원격 `main`이 서로 모르게 갈라져 있던 상태라(다른 PC/폴더에서 같은 remote에 별도로 push해온 히스토리가 있었음), 이번 대시보드 코드는 `main`이 아니라 **`funnel-dashboard` 브랜치**로 push해뒀습니다. 두 히스토리를 어떻게 정리할지는 별도 결정이 필요해서 건드리지 않았습니다.
+
+1. (이미 완료) `funnel-dashboard` 브랜치가 GitHub에 push돼 있음.
+2. [vercel.com](https://vercel.com) → GitHub 계정으로 로그인 → **Add New Project** → `verish_offline` 레포 선택.
 3. **Root Directory**를 `funnel-dashboard-web`로 지정 (레포 루트가 아니라 이 하위 폴더가 Next.js 앱이므로 반드시 지정해야 함).
-4. **Environment Variables**에 `DASHBOARD_PASSCODE` 추가 (전사 공유용 비밀번호 — Cafe24 자격증명은 여기 넣지 않음).
-5. **Deploy** 클릭 → 몇 분 뒤 `프로젝트명.vercel.app` URL 발급. 그 링크 + 비밀번호를 공유하면 됩니다.
+4. import 화면에서(또는 이후 프로젝트 **Settings → Git → Production Branch**에서) 대상 브랜치를 `funnel-dashboard`로 지정 — 기본값인 `main`으로 두면 이 코드가 안 잡힙니다.
+5. **Environment Variables**에 `DASHBOARD_PASSCODE` 추가 (전사 공유용 비밀번호 — Cafe24 자격증명은 여기 넣지 않음).
+6. **Deploy** 클릭 → 몇 분 뒤 `프로젝트명.vercel.app` URL 발급. 그 링크 + 비밀번호를 공유하면 됩니다.
+
+이후 주간 자동 업데이트(아래 4번)도 이 PC의 로컬 저장소가 지금 `funnel-dashboard` 브랜치에 체크아웃된 채로 커밋/푸시하도록 돼 있습니다.
 
 ## 4. 매주 자동 업데이트 (매주 월요일 11:00, 이 PC의 Windows 작업 스케줄러)
 

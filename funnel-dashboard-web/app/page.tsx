@@ -1,14 +1,14 @@
 import { getLatestProducts, getWeeklySummary } from "./lib/data";
+import { requireAuth } from "./lib/auth";
 import TrendChart from "./components/TrendChart";
 import ProductTable from "./components/ProductTable";
-
-export const dynamic = "force-static";
 
 function fmtWon(n: number): string {
   return `₩${n.toLocaleString("ko-KR")}`;
 }
 
-export default function Home() {
+export default async function Home() {
+  await requireAuth();
   const weeks = getWeeklySummary();
   const latest = getLatestProducts();
   const current = weeks[weeks.length - 1];
