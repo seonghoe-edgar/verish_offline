@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T10:58:12.119Z",
+  "generatedAt": "2026-08-26T11:02:34.839Z",
   "stockDate": "20260826",
   "salesWindow": {
     "from": "20260819",
@@ -2492,10 +2492,10 @@
         "risk": false
       },
       "sinjeju": {
-        "stock": 248,
+        "stock": 247,
         "sold7d": 78,
         "velocity": 11.142857142857142,
-        "daysOfStock": 22.25641025641026,
+        "daysOfStock": 22.166666666666668,
         "risk": false
       },
       "rtDirection": null,
@@ -2510,10 +2510,10 @@
       "sizeCode": "FREE",
       "styleName": "부자재",
       "aewol": {
-        "stock": 1114,
+        "stock": 1113,
         "sold7d": 237,
         "velocity": 33.857142857142854,
-        "daysOfStock": 32.902953586497894,
+        "daysOfStock": 32.87341772151899,
         "risk": false
       },
       "sinjeju": {
@@ -31388,10 +31388,10 @@
       "sizeCode": "S",
       "styleName": "브라탑",
       "aewol": {
-        "stock": 7,
+        "stock": 6,
         "sold7d": 2,
         "velocity": 0.2857142857142857,
-        "daysOfStock": 24.5,
+        "daysOfStock": 21,
         "risk": false
       },
       "sinjeju": {
@@ -38459,7 +38459,7 @@
       "styleName": "브라",
       "aewol": null,
       "sinjeju": {
-        "stock": 12,
+        "stock": 10,
         "sold7d": 0,
         "velocity": 0,
         "daysOfStock": null,
@@ -38687,7 +38687,7 @@
       "styleName": "브라",
       "aewol": null,
       "sinjeju": {
-        "stock": 10,
+        "stock": 8,
         "sold7d": 0,
         "velocity": 0,
         "daysOfStock": null,
