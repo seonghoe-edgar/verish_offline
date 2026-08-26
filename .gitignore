@@ -4,3 +4,6 @@ reports/
 .env.*
 .claude/settings.local.json
 .claude/scheduled_tasks.lock
+po-inbound-dashboard-server/service-account*.json
+po-inbound-dashboard-server/*.pem
+rt-transfer-dashboard/last-run.log
