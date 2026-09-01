@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T10:28:34.061Z",
+  "generatedAt": "2026-09-01T10:34:59.115Z",
   "stockDate": "20260901",
   "salesWindow": {
     "from": "20260825",
@@ -49,14 +49,14 @@
       {
         "key": "myeongdong",
         "name": "명동",
-        "in": 92,
-        "out": 137
+        "in": 93,
+        "out": 138
       },
       {
         "key": "seongsu",
         "name": "성수",
-        "in": 250,
-        "out": 45
+        "in": 249,
+        "out": 44
       }
     ]
   },
@@ -2977,10 +2977,10 @@
           "risk": false
         },
         "anguk": {
-          "stock": 10,
+          "stock": 9,
           "sold7d": 3,
           "velocity": 0.42857142857142855,
-          "daysOfStock": 23.333333333333336,
+          "daysOfStock": 21,
           "risk": false
         },
         "myeongdong": {
@@ -5200,10 +5200,10 @@
         },
         "anguk": null,
         "myeongdong": {
-          "stock": 3,
+          "stock": 2,
           "sold7d": 8,
           "velocity": 1.1428571428571428,
-          "daysOfStock": 2.625,
+          "daysOfStock": 1.75,
           "risk": true
         },
         "seongsu": {
@@ -5217,7 +5217,7 @@
       "flows": [
         {
           "from": "dosan",
-          "to": "seongsu",
+          "to": "myeongdong",
           "qty": 6,
           "note": ""
         }
@@ -6927,10 +6927,10 @@
           "risk": false
         },
         "seongsu": {
-          "stock": 59,
+          "stock": 58,
           "sold7d": 54,
           "velocity": 7.714285714285714,
-          "daysOfStock": 7.648148148148148,
+          "daysOfStock": 7.518518518518518,
           "risk": false
         }
       },
@@ -12961,16 +12961,16 @@
           "risk": false
         },
         "seongsu": {
-          "stock": 21,
+          "stock": 20,
           "sold7d": 10,
           "velocity": 1.4285714285714286,
-          "daysOfStock": 14.7,
+          "daysOfStock": 14,
           "risk": false
         }
       },
       "flows": [
         {
-          "from": "seongsu",
+          "from": "myeongdong",
           "to": "anguk",
           "qty": 4,
           "note": ""
@@ -21598,10 +21598,10 @@
           "risk": false
         },
         "seongsu": {
-          "stock": 8,
+          "stock": 7,
           "sold7d": 1,
           "velocity": 0.14285714285714285,
-          "daysOfStock": 56,
+          "daysOfStock": 49,
           "risk": false
         }
       },
@@ -30424,10 +30424,10 @@
           "risk": false
         },
         "seongsu": {
-          "stock": 10,
+          "stock": 9,
           "sold7d": 6,
           "velocity": 0.8571428571428571,
-          "daysOfStock": 11.666666666666668,
+          "daysOfStock": 10.5,
           "risk": false
         }
       },
@@ -30658,10 +30658,10 @@
           "risk": false
         },
         "seongsu": {
-          "stock": 9,
+          "stock": 8,
           "sold7d": 1,
           "velocity": 0.14285714285714285,
-          "daysOfStock": 63,
+          "daysOfStock": 56,
           "risk": false
         }
       },
@@ -30802,10 +30802,10 @@
           "risk": false
         },
         "seongsu": {
-          "stock": 7,
+          "stock": 6,
           "sold7d": 1,
           "velocity": 0.14285714285714285,
-          "daysOfStock": 49,
+          "daysOfStock": 42,
           "risk": false
         }
       },
@@ -33301,10 +33301,10 @@
           "risk": false
         },
         "seongsu": {
-          "stock": 30,
+          "stock": 29,
           "sold7d": 26,
           "velocity": 3.7142857142857144,
-          "daysOfStock": 8.076923076923077,
+          "daysOfStock": 7.8076923076923075,
           "risk": false
         }
       },
@@ -36100,10 +36100,10 @@
           "risk": false
         },
         "seongsu": {
-          "stock": 7,
+          "stock": 6,
           "sold7d": 4,
           "velocity": 0.5714285714285714,
-          "daysOfStock": 12.25,
+          "daysOfStock": 10.5,
           "risk": false
         }
       },
@@ -37965,10 +37965,10 @@
           "risk": false
         },
         "myeongdong": {
-          "stock": 5,
+          "stock": 4,
           "sold7d": 3,
           "velocity": 0.42857142857142855,
-          "daysOfStock": 11.666666666666668,
+          "daysOfStock": 9.333333333333334,
           "risk": false
         },
         "seongsu": {
