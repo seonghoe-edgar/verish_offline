@@ -1,14 +1,16 @@
-// 애월(VRJAFS) <-> 신제주(VRNJFS) RT(매장간 재고이동) 후보 대시보드 스냅샷 생성기.
-// 두 매장은 PlayMD 상에서 재고를 RT로 공유하는 사이 — 한쪽이 품절 임박(OOS Risk)인데
-// 반대쪽에 재고가 있으면 RT 대상으로 플래그한다. 계산 로직은 rt-engine.cjs 공유.
+// 도산/안국/명동/성수 플래그십 4개 매장 RT(매장간 재고이동) 대시보드 스냅샷 생성기.
+// 4개 매장이 하나의 풀로 상호 RT — 한 매장이 품절 임박인데 다른 매장(들) 중 재고 있는 곳이
+// 있으면 RT 대상으로 플래그한다. 계산 로직은 ../rt-transfer-dashboard/rt-engine.cjs 공유.
 // Usage: node refresh.cjs   (이 폴더에서 실행)
 const fs = require('fs');
 const path = require('path');
-const { buildSnapshot } = require('./rt-engine.cjs');
+const { buildSnapshot } = require('../rt-transfer-dashboard/rt-engine.cjs');
 
 const STORES = [
-  { key: 'aewol', shopCode: 'VRJAFS', name: '애월' },
-  { key: 'sinjeju', shopCode: 'VRNJFS', name: '신제주' },
+  { key: 'dosan', shopCode: 'VRDSFS', name: '도산' },
+  { key: 'anguk', shopCode: 'VRAGFS', name: '안국' },
+  { key: 'myeongdong', shopCode: 'VRMDFS', name: '명동' },
+  { key: 'seongsu', shopCode: 'VRSSFS', name: '성수' },
 ];
 
 const VELOCITY_WINDOW_DAYS = 7;
@@ -22,12 +24,12 @@ async function main() {
     riskDaysThreshold: RISK_DAYS_THRESHOLD,
     minTransferQty: MIN_TRANSFER_QTY,
   });
-  snapshot.title = '애월 · 신제주 RT 대시보드';
-  snapshot.subtitle = '두 매장은 PlayMD 상에서 재고를 RT(매장간 이동)로 공유 — 한쪽이 품절 임박인데 반대쪽에 재고가 있으면 이동 대상으로 표시합니다.';
+  snapshot.title = '플래그십 RT 대시보드';
+  snapshot.subtitle = '도산 · 안국 · 명동 · 성수 4개 매장이 하나의 풀로 상호 RT(매장간 이동) — 한 매장이 품절 임박인데 다른 매장에 재고가 있으면 이동 대상으로 표시합니다.';
 
   fs.writeFileSync(path.join(__dirname, 'data.json'), JSON.stringify(snapshot, null, 2), 'utf-8');
 
-  const template = fs.readFileSync(path.join(__dirname, 'rt_dashboard_template.html'), 'utf-8');
+  const template = fs.readFileSync(path.join(__dirname, '..', 'rt-transfer-dashboard', 'rt_dashboard_template.html'), 'utf-8');
   const now = new Date();
   const pad = (n) => String(n).padStart(2, '0');
   const timeStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
@@ -40,8 +42,7 @@ async function main() {
   fs.writeFileSync(outPath, out, 'utf-8');
   console.log('written', outPath, 'size', fs.statSync(outPath).size);
 
-  // Vercel 정적 배포용 사본 — 같은 조각(fragment)을 표준 HTML 문서로 감싸기만 함(내용은 동일).
-  const webDir = path.join(__dirname, '..', 'rt-transfer-dashboard-web');
+  const webDir = path.join(__dirname, '..', 'rt-transfer-dashboard-flagship-web');
   if (fs.existsSync(webDir)) {
     const webOut =
       '<!doctype html>\n<html lang="ko">\n<head>\n<meta charset="utf-8">\n' +

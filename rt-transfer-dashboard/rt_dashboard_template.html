@@ -1,4 +1,4 @@
-<title>애월·신제주 RT 대시보드</title>
+<title>__DASHBOARD_TITLE__</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -6,8 +6,8 @@
   :root{
     --bg:#F7F4EE; --surface:#FFFFFF; --surface-2:#EFEAE0; --ink:#24211D; --ink-dim:#6E675C;
     --line:#E3DBCC; --line-strong:#D2C7B4;
-    --aewol:#B85A22; --aewol-bg:#F6E4D2; --aewol-ink:#5C2C0F;
-    --sinjeju:#22665F; --sinjeju-bg:#DCEAE6; --sinjeju-ink:#123832;
+    --accent:#B85A22; --accent-bg:#F6E4D2; --accent-ink:#5C2C0F;
+    --accent-2:#22665F; --accent-2-bg:#DCEAE6; --accent-2-ink:#123832;
     --ok:#3F7D52; --ok-bg:#E4EFE4;
     --warn:#A8752E; --warn-bg:#F3E7CC;
     --critical:#B23B33; --critical-bg:#F6E1DE;
@@ -21,8 +21,8 @@
     :root:not([data-theme="light"]){
       --bg:#1B1815; --surface:#242019; --surface-2:#2C271F; --ink:#F1EBE2; --ink-dim:#A79C8C;
       --line:#3B342A; --line-strong:#4A4133;
-      --aewol:#E8935A; --aewol-bg:#3A2718; --aewol-ink:#F6D9BE;
-      --sinjeju:#6FBBAF; --sinjeju-bg:#1B322E; --sinjeju-ink:#BFE7DE;
+      --accent:#E8935A; --accent-bg:#3A2718; --accent-ink:#F6D9BE;
+      --accent-2:#6FBBAF; --accent-2-bg:#1B322E; --accent-2-ink:#BFE7DE;
       --ok:#7FBF93; --ok-bg:#1E3024; --warn:#E0B36B; --warn-bg:#3A2E17;
       --critical:#E58F8A; --critical-bg:#3A211F;
       --shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.35);
@@ -31,8 +31,8 @@
   :root[data-theme="dark"]{
     --bg:#1B1815; --surface:#242019; --surface-2:#2C271F; --ink:#F1EBE2; --ink-dim:#A79C8C;
     --line:#3B342A; --line-strong:#4A4133;
-    --aewol:#E8935A; --aewol-bg:#3A2718; --aewol-ink:#F6D9BE;
-    --sinjeju:#6FBBAF; --sinjeju-bg:#1B322E; --sinjeju-ink:#BFE7DE;
+    --accent:#E8935A; --accent-bg:#3A2718; --accent-ink:#F6D9BE;
+    --accent-2:#6FBBAF; --accent-2-bg:#1B322E; --accent-2-ink:#BFE7DE;
     --ok:#7FBF93; --ok-bg:#1E3024; --warn:#E0B36B; --warn-bg:#3A2E17;
     --critical:#E58F8A; --critical-bg:#3A211F;
     --shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.35);
@@ -40,8 +40,8 @@
   :root[data-theme="light"]{
     --bg:#F7F4EE; --surface:#FFFFFF; --surface-2:#EFEAE0; --ink:#24211D; --ink-dim:#6E675C;
     --line:#E3DBCC; --line-strong:#D2C7B4;
-    --aewol:#B85A22; --aewol-bg:#F6E4D2; --aewol-ink:#5C2C0F;
-    --sinjeju:#22665F; --sinjeju-bg:#DCEAE6; --sinjeju-ink:#123832;
+    --accent:#B85A22; --accent-bg:#F6E4D2; --accent-ink:#5C2C0F;
+    --accent-2:#22665F; --accent-2-bg:#DCEAE6; --accent-2-ink:#123832;
     --ok:#3F7D52; --ok-bg:#E4EFE4; --warn:#A8752E; --warn-bg:#F3E7CC;
     --critical:#B23B33; --critical-bg:#F6E1DE;
     --shadow: 0 1px 2px rgba(36,33,29,.06), 0 6px 20px rgba(36,33,29,.06);
@@ -53,36 +53,36 @@
     background:var(--bg); color:var(--ink); font-family:var(--sans);
     font-size:14px; line-height:1.55; -webkit-font-smoothing:antialiased;
   }
-  ::selection{ background:var(--aewol); color:#fff; }
+  ::selection{ background:var(--accent); color:#fff; }
   .wrap{ max-width:1180px; margin:0 auto; padding:32px 20px 64px; }
 
-  header.top{ display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:22px; }
+  header.top{ display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:10px; }
   header.top h1{
     font-family:var(--display); font-weight:700; font-size:26px; letter-spacing:-0.01em;
     margin:0; text-wrap:balance;
   }
-  header.top .sub{ color:var(--ink-dim); font-size:13px; margin-top:4px; }
+  header.top .sub{ color:var(--ink-dim); font-size:13px; margin-top:4px; max-width:640px; }
   header.top .meta{ text-align:right; font-size:12px; color:var(--ink-dim); font-family:var(--mono); }
   header.top .meta b{ color:var(--ink); font-weight:600; }
 
-  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink-dim); margin-bottom:20px; }
-  .legend .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:5px; vertical-align:middle; }
-  .legend .dot.aewol{ background:var(--aewol); }
-  .legend .dot.sinjeju{ background:var(--sinjeju); }
+  .legend{ font-size:12px; color:var(--ink-dim); margin-bottom:20px; }
 
-  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:24px; }
+  .kpis{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
   .kpi{
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
-    padding:16px 18px; box-shadow:var(--shadow);
+    padding:16px 18px; box-shadow:var(--shadow); flex:1 1 180px;
   }
   .kpi .label{ font-size:12px; color:var(--ink-dim); font-weight:500; }
   .kpi .value{ font-family:var(--display); font-weight:700; font-size:28px; margin-top:6px; font-variant-numeric:tabular-nums; }
   .kpi.rt .value{ color:var(--critical); }
   .kpi .value small{ font-family:var(--sans); font-size:13px; font-weight:500; color:var(--ink-dim); }
-  .kpi .flow{ margin-top:8px; display:flex; gap:8px; font-size:12px; }
-  .kpi .flow span{ font-family:var(--mono); font-weight:600; }
-  .kpi .flow .a{ color:var(--aewol); }
-  .kpi .flow .s{ color:var(--sinjeju); }
+  .kpi.stores{ flex:2 1 320px; }
+  .store-flow-grid{ display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:8px; }
+  .store-flow-grid .row{ font-size:13px; }
+  .store-flow-grid .name{ font-weight:600; }
+  .store-flow-grid .nums{ font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); }
+  .store-flow-grid .nums b.in{ color:var(--ok); }
+  .store-flow-grid .nums b.out{ color:var(--accent); }
 
   .controls{
     display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px;
@@ -93,7 +93,11 @@
     flex:1 1 220px; min-width:160px; padding:8px 12px; border-radius:8px; border:1px solid var(--line-strong);
     background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:13px;
   }
-  .controls input[type="search"]:focus{ outline:2px solid var(--aewol); outline-offset:1px; }
+  .controls input[type="search"]:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+  .controls select{
+    padding:8px 10px; border-radius:8px; border:1px solid var(--line-strong);
+    background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:13px;
+  }
   .seg{ display:flex; border:1px solid var(--line-strong); border-radius:8px; overflow:hidden; }
   .seg button{
     border:none; background:var(--surface); color:var(--ink-dim); font-family:var(--sans); font-size:12.5px;
@@ -101,17 +105,16 @@
   }
   .seg button:last-child{ border-right:none; }
   .seg button.active{ background:var(--ink); color:var(--surface); }
-  .seg button:focus-visible{ outline:2px solid var(--aewol); outline-offset:-2px; }
+  .seg button:focus-visible{ outline:2px solid var(--accent); outline-offset:-2px; }
   .count{ font-size:12px; color:var(--ink-dim); font-family:var(--mono); margin-left:auto; }
 
   .table-scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); box-shadow:var(--shadow); }
-  table{ width:100%; border-collapse:collapse; font-size:13px; min-width:920px; }
+  table{ width:100%; border-collapse:collapse; font-size:13px; min-width:780px; }
   thead th{
     text-align:left; font-size:11px; letter-spacing:.03em; text-transform:uppercase; font-weight:600;
     color:var(--ink-dim); padding:10px 12px; border-bottom:1px solid var(--line-strong); white-space:nowrap;
     background:var(--surface-2); position:sticky; top:0;
   }
-  thead th.num, td.num{ text-align:right; }
   tbody td{ padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:middle; }
   tbody tr:last-child td{ border-bottom:none; }
   tbody tr:hover{ background:var(--surface-2); }
@@ -121,53 +124,52 @@
   .mono{ font-family:var(--mono); font-variant-numeric:tabular-nums; }
   .dim{ color:var(--ink-dim); }
 
-  .pill{ display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:600; font-family:var(--mono); }
-  .pill.ok{ background:var(--ok-bg); color:var(--ok); }
-  .pill.warn{ background:var(--warn-bg); color:var(--warn); }
-  .pill.critical{ background:var(--critical-bg); color:var(--critical); }
-  .pill.na{ background:var(--surface-2); color:var(--ink-dim); }
+  .store-status{ display:flex; flex-wrap:wrap; gap:6px; }
+  .store-pill{
+    display:inline-flex; align-items:baseline; gap:5px; font-size:11.5px; padding:3px 8px;
+    border-radius:999px; border:1px solid var(--line-strong); white-space:nowrap;
+  }
+  .store-pill .n{ font-weight:600; }
+  .store-pill .d{ font-family:var(--mono); font-weight:600; }
+  .store-pill.ok{ background:var(--ok-bg); color:var(--ok); border-color:transparent; }
+  .store-pill.warn{ background:var(--warn-bg); color:var(--warn); border-color:transparent; }
+  .store-pill.critical{ background:var(--critical-bg); color:var(--critical); border-color:transparent; }
+  .store-pill.na{ background:var(--surface-2); color:var(--ink-dim); }
 
-  .flowcell{ display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; white-space:nowrap; }
-  .store-badge{ padding:2px 8px; border-radius:6px; font-size:11.5px; font-weight:700; }
-  .store-badge.a{ background:var(--aewol-bg); color:var(--aewol-ink); }
-  .store-badge.s{ background:var(--sinjeju-bg); color:var(--sinjeju-ink); }
-  .arrow{ color:var(--ink-dim); }
-
-  .suggest{ font-family:var(--mono); font-weight:600; }
-  .suggest .note{ display:block; font-family:var(--sans); font-weight:400; font-size:11px; color:var(--warn); margin-top:2px; }
+  .flows{ display:flex; flex-direction:column; gap:5px; }
+  .flow-chip{ display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; white-space:nowrap; }
+  .flow-chip .badge{ padding:2px 8px; border-radius:6px; font-size:11.5px; font-weight:700; background:var(--surface-2); color:var(--ink); }
+  .flow-chip .arrow{ color:var(--ink-dim); }
+  .flow-chip .qty{ font-family:var(--mono); color:var(--accent); }
+  .flow-chip .note{ display:block; font-family:var(--sans); font-weight:400; font-size:11px; color:var(--warn); }
 
   .empty{ padding:40px 16px; text-align:center; color:var(--ink-dim); }
   footer{ margin-top:22px; font-size:11.5px; color:var(--ink-dim); }
   footer a{ color:inherit; }
 
   @media (max-width:720px){
-    .kpis{ grid-template-columns:repeat(2,1fr); }
+    .kpis{ flex-direction:column; }
   }
 </style>
 
 <div class="wrap">
   <header class="top">
     <div>
-      <h1>애월 · 신제주 RT 대시보드</h1>
-      <div class="sub">두 매장은 PlayMD 상에서 재고를 RT(매장간 이동)로 공유 — 한쪽이 품절 임박인데 반대쪽에 재고가 있으면 이동 대상으로 표시합니다.</div>
+      <h1 id="pageTitle"></h1>
+      <div class="sub" id="pageSub"></div>
     </div>
     <div class="meta" id="meta"></div>
   </header>
 
-  <div class="legend">
-    <span><span class="dot aewol"></span>애월 (VRJAFS)</span>
-    <span><span class="dot sinjeju"></span>신제주 (VRNJFS)</span>
-    <span>기준: 최근 7일 평균 판매속도 · 소진예상 7일 이내면 위험 · 권장 이동수량 2개 미만은 제외</span>
-  </div>
+  <div class="legend" id="legend"></div>
 
   <div class="kpis" id="kpis"></div>
 
   <div class="controls">
     <input type="search" id="search" placeholder="상품명 · 옵션 · 코드 검색" autocomplete="off">
+    <select id="storeFilter"><option value="all">전체 매장</option></select>
     <div class="seg" id="dirFilter" role="tablist">
       <button data-v="rt" class="active">RT 대상만</button>
-      <button data-v="a2s">애월→신제주</button>
-      <button data-v="s2a">신제주→애월</button>
       <button data-v="all">전체 비교</button>
     </div>
     <span class="count" id="count"></span>
@@ -179,14 +181,8 @@
         <tr>
           <th>상품</th>
           <th>카테고리</th>
-          <th class="num">애월 재고</th>
-          <th class="num">애월 7일평균</th>
-          <th class="num">애월 소진예상</th>
-          <th class="num">신제주 재고</th>
-          <th class="num">신제주 7일평균</th>
-          <th class="num">신제주 소진예상</th>
-          <th>RT 방향</th>
-          <th class="num">권장 이동수량</th>
+          <th>매장별 현황</th>
+          <th>RT 이동</th>
         </tr>
       </thead>
       <tbody id="rows"></tbody>
@@ -194,82 +190,94 @@
     <div class="empty" id="emptyMsg" style="display:none;">조건에 맞는 상품이 없습니다.</div>
   </div>
 
-  <footer>
-    데이터: PlayMD POS(애월 VRJAFS · 신제주 VRNJFS) · 재고 기준일 <span id="stockDateFoot"></span> · 판매속도 산정기간 <span id="salesWindowFoot"></span><br>
-    권장 이동수량은 참고용 추정치입니다(소진예상 7일 확보 기준) — 실제 이동은 현장 재고 실사와 함께 판단해주세요.
-  </footer>
+  <footer id="footerNote"></footer>
 </div>
 
 <script>
   const SNAPSHOT = __SNAPSHOT_JSON__;
   const GENERATED_TIME = "__SNAPSHOT_TIME__";
+  const STORES_BY_KEY = Object.fromEntries(SNAPSHOT.stores.map(s => [s.key, s]));
 
-  function daysLabel(d, stock){
-    if (stock !== null && stock <= 0) return { text: '품절', cls: 'critical' };
-    if (d === null) return { text: '–', cls: 'na' };
-    const rounded = Math.round(d * 10) / 10;
-    const cls = rounded <= 3 ? 'critical' : (rounded <= 7 ? 'warn' : 'ok');
-    return { text: rounded + '일', cls };
-  }
+  function fmtApiDate(s){ return s ? (s.slice(0,4) + '-' + s.slice(4,6) + '-' + s.slice(6,8)) : ''; }
 
-  function storeCell(store){
-    if (!store) return '<td class="num dim">–</td><td class="num dim">–</td><td class="num"><span class="pill na">–</span></td>';
-    const dl = daysLabel(store.daysOfStock, store.stock);
-    return (
-      '<td class="num mono">' + store.stock + '</td>' +
-      '<td class="num mono">' + (Math.round(store.velocity * 10) / 10) + '</td>' +
-      '<td class="num"><span class="pill ' + dl.cls + '">' + dl.text + '</span></td>'
-    );
-  }
-
-  function directionCell(item){
-    if (item.rtDirection === 'sinjeju_to_aewol') {
-      return '<span class="flowcell"><span class="store-badge s">신제주</span><span class="arrow">&#8594;</span><span class="store-badge a">애월</span></span>';
+  function storePillHtml(storeKey, info){
+    const name = STORES_BY_KEY[storeKey].name;
+    if (!info) return '<span class="store-pill na"><span class="n">' + name + '</span><span class="d">–</span></span>';
+    let cls, label;
+    if (info.stock <= 0) { cls = 'critical'; label = '품절'; }
+    else if (info.daysOfStock === null) { cls = 'ok'; label = '–'; }
+    else {
+      const rounded = Math.round(info.daysOfStock * 10) / 10;
+      cls = rounded <= 3 ? 'critical' : (rounded <= SNAPSHOT.riskDaysThreshold ? 'warn' : 'ok');
+      label = rounded + '일';
     }
-    if (item.rtDirection === 'aewol_to_sinjeju') {
-      return '<span class="flowcell"><span class="store-badge a">애월</span><span class="arrow">&#8594;</span><span class="store-badge s">신제주</span></span>';
-    }
-    return '<span class="dim">–</span>';
+    return '<span class="store-pill ' + cls + '"><span class="n">' + name + '</span><span class="d">' + info.stock + ' · ' + label + '</span></span>';
   }
 
-  function suggestCell(item){
-    if (!item.rtDirection) return '<span class="dim">–</span>';
-    let html = '<span class="suggest">' + item.suggestedQty + '</span>';
-    if (item.suggestedNote) html += '<span class="note">' + item.suggestedNote + '</span>';
+  function flowChipHtml(flow){
+    const fromName = STORES_BY_KEY[flow.from].name;
+    const toName = STORES_BY_KEY[flow.to].name;
+    let html = '<div class="flow-chip"><span class="badge">' + fromName + '</span><span class="arrow">&#8594;</span><span class="badge">' + toName + '</span><span class="qty">' + flow.qty + '</span></div>';
+    if (flow.note) html += '<span class="note">' + flow.note + '</span>';
     return html;
   }
 
   function rowHtml(item){
+    const statusHtml = SNAPSHOT.stores.map(s => storePillHtml(s.key, item.storeData[s.key])).join('');
+    const flowsHtml = item.flows.length ? item.flows.map(flowChipHtml).join('') : '<span class="dim">–</span>';
     return (
       '<tr>' +
       '<td><div class="prod">' + item.productName + '</div><div class="opt">' + (item.colorName || '') + (item.sizeCode ? ' / ' + item.sizeCode : '') + ' · ' + item.productCode + '</div></td>' +
       '<td><span class="cat">' + (item.styleName || '-') + '</span></td>' +
-      storeCell(item.aewol) +
-      storeCell(item.sinjeju) +
-      '<td>' + directionCell(item) + '</td>' +
-      '<td class="num">' + suggestCell(item) + '</td>' +
+      '<td><div class="store-status">' + statusHtml + '</div></td>' +
+      '<td><div class="flows">' + flowsHtml + '</div></td>' +
       '</tr>'
     );
   }
 
+  function renderHeader(){
+    document.getElementById('pageTitle').textContent = SNAPSHOT.title;
+    document.getElementById('pageSub').textContent = SNAPSHOT.subtitle;
+    document.title = SNAPSHOT.title;
+    document.getElementById('legend').textContent =
+      '기준: 최근 ' + SNAPSHOT.salesWindow.days + '일 평균 판매속도 · 소진예상 ' + SNAPSHOT.riskDaysThreshold + '일 이내면 위험 · 권장 이동수량 ' + SNAPSHOT.minTransferQty + '개 미만은 제외';
+    document.getElementById('meta').innerHTML = '갱신: <b>' + GENERATED_TIME + '</b>';
+    document.getElementById('footerNote').innerHTML =
+      '데이터: PlayMD POS(' + SNAPSHOT.stores.map(s => s.name + ' ' + s.shopCode).join(' · ') + ') · 재고 기준일 ' + fmtApiDate(SNAPSHOT.stockDate) +
+      ' · 판매속도 산정기간 ' + fmtApiDate(SNAPSHOT.salesWindow.from) + ' ~ ' + fmtApiDate(SNAPSHOT.salesWindow.to) +
+      '<br>권장 이동수량은 참고용 추정치입니다(소진예상 ' + SNAPSHOT.riskDaysThreshold + '일 확보 기준) — 실제 이동은 현장 재고 실사와 함께 판단해주세요.';
+
+    const select = document.getElementById('storeFilter');
+    for (const s of SNAPSHOT.stores) {
+      const opt = document.createElement('option');
+      opt.value = s.key;
+      opt.textContent = s.name;
+      select.appendChild(opt);
+    }
+  }
+
   function renderKpis(){
     const s = SNAPSHOT.summary;
+    const storeRows = s.byStore.map(st =>
+      '<div class="row"><span class="name">' + st.name + '</span> <span class="nums"><b class="in">←' + st.in + '</b> / <b class="out">' + st.out + '→</b></span></div>'
+    ).join('');
     document.getElementById('kpis').innerHTML =
       '<div class="kpi rt"><div class="label">RT 대상 SKU</div><div class="value">' + s.rtTotal + '<small> / ' + s.totalSkus + '</small></div></div>' +
-      '<div class="kpi"><div class="label">애월 &#8594; 신제주</div><div class="value" style="color:var(--aewol)">' + s.aewolToSinjeju + '</div></div>' +
-      '<div class="kpi"><div class="label">신제주 &#8594; 애월</div><div class="value" style="color:var(--sinjeju)">' + s.sinjejuToAewol + '</div></div>' +
-      '<div class="kpi"><div class="label">기준</div><div class="value" style="font-size:15px;font-family:var(--sans);font-weight:600;">소진예상 ' + SNAPSHOT.riskDaysThreshold + '일 이내</div></div>';
+      '<div class="kpi stores"><div class="label">매장별 수신(←) / 발신(→) 건수</div><div class="store-flow-grid">' + storeRows + '</div></div>';
   }
 
   let currentFilter = 'rt';
   let currentQuery = '';
+  let currentStore = 'all';
 
   function applyFilters(){
     const q = currentQuery.trim().toLowerCase();
     return SNAPSHOT.items.filter((item) => {
-      if (currentFilter === 'rt' && !item.rtDirection) return false;
-      if (currentFilter === 'a2s' && item.rtDirection !== 'aewol_to_sinjeju') return false;
-      if (currentFilter === 's2a' && item.rtDirection !== 'sinjeju_to_aewol') return false;
+      if (currentFilter === 'rt' && item.flows.length === 0) return false;
+      if (currentStore !== 'all') {
+        const involved = item.flows.some(f => f.from === currentStore || f.to === currentStore) || !!item.storeData[currentStore];
+        if (!involved) return false;
+      }
       if (!q) return true;
       const hay = (item.productName + ' ' + item.productCode + ' ' + (item.colorName || '') + ' ' + (item.styleName || '')).toLowerCase();
       return hay.indexOf(q) !== -1;
@@ -284,6 +292,7 @@
   }
 
   document.getElementById('search').addEventListener('input', (e) => { currentQuery = e.target.value; render(); });
+  document.getElementById('storeFilter').addEventListener('change', (e) => { currentStore = e.target.value; render(); });
   document.querySelectorAll('#dirFilter button').forEach((btn) => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('#dirFilter button').forEach((b) => b.classList.remove('active'));
@@ -293,12 +302,7 @@
     });
   });
 
-  function fmtApiDate(s){ return s ? (s.slice(0,4) + '-' + s.slice(4,6) + '-' + s.slice(6,8)) : ''; }
-
-  document.getElementById('meta').innerHTML = '갱신: <b>' + GENERATED_TIME + '</b>';
-  document.getElementById('stockDateFoot').textContent = fmtApiDate(SNAPSHOT.stockDate);
-  document.getElementById('salesWindowFoot').textContent = fmtApiDate(SNAPSHOT.salesWindow.from) + ' ~ ' + fmtApiDate(SNAPSHOT.salesWindow.to);
-
+  renderHeader();
   renderKpis();
   render();
 </script>

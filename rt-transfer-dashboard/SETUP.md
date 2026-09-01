@@ -6,12 +6,18 @@
 
 ## 구성
 
-- `refresh.cjs` — PlayMD API에서 두 매장의 당일 재고(`stock_shop`)와 최근 7일 판매(`sales`)를
-  가져와 SKU 단위(productCode+color+size)로 병합·계산하고 `data.json` + `rt_dashboard.html`을 생성합니다.
-- `rt_dashboard_template.html` — 대시보드 화면 템플릿 (`__SNAPSHOT_JSON__` / `__SNAPSHOT_TIME__` 치환).
+- `rt-engine.cjs` — **공용 계산 엔진**. PlayMD에서 매장별 당일 재고(`stock_shop`)/최근 7일 판매(`sales`)를
+  가져와 N개 매장이 하나의 풀로 상호 RT하는 경우의 위험/이동추천을 계산 (`buildSnapshot()`). 2개 매장
+  (여기)뿐 아니라 4개 매장짜리 [플래그십 대시보드](../rt-transfer-dashboard-flagship/SETUP.md)도 이 엔진을
+  그대로 가져다 씀 — store 목록만 다르게 넘기면 됨.
+- `refresh.cjs` — 애월/신제주 store 목록으로 `rt-engine.cjs`를 호출하고 `data.json` + `rt_dashboard.html`을 생성.
+- `rt_dashboard_template.html` — **공용 대시보드 화면 템플릿** (매장 수에 상관없이 동작하도록 매장별
+  상태를 칩으로 렌더링). `__DASHBOARD_TITLE__` / `__SNAPSHOT_JSON__` / `__SNAPSHOT_TIME__` 치환.
+  플래그십 대시보드도 이 파일을 그대로 참조함(복제 아님).
 - `rt_dashboard.html` — 매일 갱신되는 실제 화면 파일. 로컬에서 그냥 더블클릭해서 열어도 되고,
   Claude Code 세션에서 Artifact로 재발행하면 공유 가능한 링크로도 볼 수 있습니다.
-- `run-refresh.ps1` — Windows 작업 스케줄러가 매일 호출하는 래퍼 스크립트.
+- `run-refresh.ps1` — Windows 작업 스케줄러가 매일 호출하는 래퍼 스크립트 (이 대시보드 +
+  플래그십 대시보드 둘 다 갱신).
 - `data.json` — 계산 결과 원본 스냅샷(디버깅/검증용).
 
 ## 판단 기준 (2026-08-26 기준 합의)
@@ -28,6 +34,10 @@
 
 기준을 바꾸고 싶으면 `refresh.cjs` 상단의 `VELOCITY_WINDOW_DAYS`, `RISK_DAYS_THRESHOLD`만 수정하면 됩니다.
 
+**3개 이상 매장이 하나의 풀로 RT하는 경우** (예: 플래그십 4개 매장)는 위험 매장을 급한 순으로 먼저
+처리하면서 그때마다 "자기 몫 7일치를 남기고도 여유가 가장 많은" donor 매장 하나를 매칭하고, 매칭될
+때마다 그 donor의 남은 여유를 차감합니다 — 자세한 내용은 `rt-engine.cjs`의 `buildSnapshot()` 참고.
+
 ## 자동화
 
 Windows 작업 스케줄러에 매일 11:00 실행되는 작업이 등록되어 있습니다.
@@ -43,10 +53,11 @@ Get-ScheduledTask -TaskName "VerishRTDashboardDailyUpdate"
   Register-ScheduledTask -TaskName "VerishRTDashboardDailyUpdate" -Action $action -Trigger $trigger -Force
   ```
 - 실행 로그: `last-run.log` (같은 폴더에 매 실행마다 덮어쓰기).
-- `run-refresh.ps1`은 데이터 갱신 후 `data.json` / `rt_dashboard.html` / `../rt-transfer-dashboard-web/index.html`
-  변경분만 골라 `online-folder-snapshot` 브랜치로 자동 `git commit + push`합니다 — 이 push를 Vercel이
-  감지해 [rt-transfer-dashboard-web](../rt-transfer-dashboard-web/SETUP.md)가 자동 재배포되므로, Vercel
-  URL은 매일 실제로 최신 상태를 유지합니다(2026-08-26 사용자 승인, 자동 push 허용).
+- `run-refresh.ps1`은 이 대시보드와 [플래그십 대시보드](../rt-transfer-dashboard-flagship/SETUP.md)를
+  순서대로 갱신한 뒤, 두 대시보드의 `data.json` / `rt_dashboard.html` / `*-web/index.html` 변경분만
+  골라 `online-folder-snapshot` 브랜치로 자동 `git commit + push`합니다 — 이 push를 Vercel이 감지해
+  각자의 정적 사이트가 자동 재배포되므로, 두 Vercel URL 모두 매일 실제로 최신 상태를 유지합니다
+  (2026-08-26 사용자 승인, 자동 push 허용).
 - **공유된 Claude Artifact 링크는 이 자동화 범위 밖입니다.** 그쪽까지 최신으로 올리려면 Claude Code
   세션에서 "RT 대시보드 최신으로 올려줘"라고 요청해야 합니다(Artifact는 세션에서만 재발행 가능).
 
