@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T10:13:52.250Z",
+  "generatedAt": "2026-09-01T10:24:01.935Z",
   "stockDate": "20260901",
   "salesWindow": {
     "from": "20260825",
@@ -21,7 +21,7 @@
     }
   ],
   "summary": {
-    "totalSkus": 1917,
+    "totalSkus": 1914,
     "rtTotal": 28,
     "byStore": [
       {
@@ -1970,11 +1970,11 @@
           "risk": false
         },
         "sinjeju": {
-          "stock": 3,
+          "stock": 2,
           "sold7d": 2,
           "velocity": 0.2857142857142857,
-          "daysOfStock": 10.5,
-          "risk": false
+          "daysOfStock": 7,
+          "risk": true
         }
       },
       "flows": []
@@ -2095,11 +2095,11 @@
           "risk": false
         },
         "sinjeju": {
-          "stock": 4,
+          "stock": 3,
           "sold7d": 3,
           "velocity": 0.42857142857142855,
-          "daysOfStock": 9.333333333333334,
-          "risk": false
+          "daysOfStock": 7,
+          "risk": true
         }
       },
       "flows": []
@@ -5434,10 +5434,10 @@
           "risk": false
         },
         "sinjeju": {
-          "stock": 5,
+          "stock": 4,
           "sold7d": 1,
           "velocity": 0.14285714285714285,
-          "daysOfStock": 35,
+          "daysOfStock": 28,
           "risk": false
         }
       },
@@ -6101,56 +6101,6 @@
           "sold7d": 0,
           "velocity": 0,
           "daysOfStock": null,
-          "risk": false
-        }
-      },
-      "flows": []
-    },
-    {
-      "key": "VALAU0193__ZZZ__FREE",
-      "productCode": "VALAU0193",
-      "productName": "쇼핑백 제주 에디션 L (350*140*350mm)",
-      "colorName": "해당없음",
-      "sizeCode": "FREE",
-      "styleName": "부자재",
-      "storeData": {
-        "aewol": {
-          "stock": 231,
-          "sold7d": 2,
-          "velocity": 0.2857142857142857,
-          "daysOfStock": 808.5,
-          "risk": false
-        },
-        "sinjeju": {
-          "stock": 197,
-          "sold7d": 54,
-          "velocity": 7.714285714285714,
-          "daysOfStock": 25.537037037037038,
-          "risk": false
-        }
-      },
-      "flows": []
-    },
-    {
-      "key": "VALAU0194__ZZZ__FREE",
-      "productCode": "VALAU0194",
-      "productName": "쇼핑백 제주 에디션 S (320*170*230mm)",
-      "colorName": "해당없음",
-      "sizeCode": "FREE",
-      "styleName": "부자재",
-      "storeData": {
-        "aewol": {
-          "stock": 943,
-          "sold7d": 191,
-          "velocity": 27.285714285714285,
-          "daysOfStock": 34.56020942408377,
-          "risk": false
-        },
-        "sinjeju": {
-          "stock": 1086,
-          "sold7d": 268,
-          "velocity": 38.285714285714285,
-          "daysOfStock": 28.365671641791046,
           "risk": false
         }
       },
@@ -16680,31 +16630,6 @@
           "risk": false
         },
         "sinjeju": null
-      },
-      "flows": []
-    },
-    {
-      "key": "VALGS0026__WH__FREE",
-      "productCode": "VALGS0026",
-      "productName": "베리시 쇼핑백 - 쇼핑백 3.0 L (350*350*140mm)",
-      "colorName": "화이트",
-      "sizeCode": "FREE",
-      "styleName": "굿즈",
-      "storeData": {
-        "aewol": {
-          "stock": 964,
-          "sold7d": 19,
-          "velocity": 2.7142857142857144,
-          "daysOfStock": 355.1578947368421,
-          "risk": false
-        },
-        "sinjeju": {
-          "stock": 500,
-          "sold7d": 0,
-          "velocity": 0,
-          "daysOfStock": null,
-          "risk": false
-        }
       },
       "flows": []
     },
@@ -44370,10 +44295,10 @@
       "storeData": {
         "aewol": null,
         "sinjeju": {
-          "stock": 5,
+          "stock": 6,
           "sold7d": 2,
           "velocity": 0.2857142857142857,
-          "daysOfStock": 17.5,
+          "daysOfStock": 21,
           "risk": false
         }
       },
@@ -44389,10 +44314,10 @@
       "storeData": {
         "aewol": null,
         "sinjeju": {
-          "stock": 3,
+          "stock": 2,
           "sold7d": 3,
           "velocity": 0.42857142857142855,
-          "daysOfStock": 7,
+          "daysOfStock": 4.666666666666667,
           "risk": true
         }
       },

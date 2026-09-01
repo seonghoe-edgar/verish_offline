@@ -52,6 +52,9 @@ function skuKey(productCode, colorCode, sizeCode) {
   return `${productCode}__${colorCode || ''}__${sizeCode || ''}`;
 }
 
+// 쇼핑백처럼 RT(재고이동) 대상으로 의미 없는 포장재/부자재는 상품명으로 걸러낸다.
+const EXCLUDE_NAME_PATTERN = /쇼핑백/;
+
 async function fetchStock(shopCode, stockDate) {
   const { status, body } = await get(`/api/open/stock_shop?shop=${shopCode}&stockDate=${stockDate}`);
   if (status !== 200) throw new Error(`stock_shop ${shopCode} ${status}: ${body.slice(0, 200)}`);
@@ -146,6 +149,7 @@ async function buildSnapshot({ stores, velocityWindowDays = 7, riskDaysThreshold
       storeData[store.key] = { stock: stockRow.stockCount, sold7d: sold, velocity, daysOfStock, risk };
     }
     if (!base) continue;
+    if (EXCLUDE_NAME_PATTERN.test(base.productName)) continue; // 쇼핑백 등 RT 대상이 아닌 부자재/포장재
 
     // 위험 매장을 급한 순(재고0/소진임박 먼저)으로 정렬 - 급한 곳부터 먼저 배정
     const riskStores = stores

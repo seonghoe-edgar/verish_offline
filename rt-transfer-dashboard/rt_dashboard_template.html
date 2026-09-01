@@ -275,7 +275,8 @@
     return SNAPSHOT.items.filter((item) => {
       if (currentFilter === 'rt' && item.flows.length === 0) return false;
       if (currentStore !== 'all') {
-        const involved = item.flows.some(f => f.from === currentStore || f.to === currentStore) || !!item.storeData[currentStore];
+        // 매장을 고르면 그 매장이 실제로 RT 이동에 관여하는 SKU만 (단순히 취급하는 것만으론 통과 안 함)
+        const involved = item.flows.some(f => f.from === currentStore || f.to === currentStore);
         if (!involved) return false;
       }
       if (!q) return true;
