@@ -167,7 +167,7 @@
 
   <div class="controls">
     <input type="search" id="search" placeholder="상품명 · 옵션 · 코드 검색" autocomplete="off">
-    <select id="storeFilter" title="선택한 매장이 보내거나 받는 이동만 표시됩니다"><option value="all">전체 매장</option></select>
+    <select id="storeFilter" title="선택한 매장이 받는 이동만 표시됩니다"><option value="all">전체 매장</option></select>
     <div class="seg" id="dirFilter" role="tablist">
       <button data-v="rt" class="active">RT 대상만</button>
       <button data-v="all">전체 비교</button>
@@ -224,8 +224,8 @@
 
   function rowHtml(item){
     const statusHtml = SNAPSHOT.stores.map(s => storePillHtml(s.key, item.storeData[s.key])).join('');
-    // 매장을 골랐으면 그 매장이 보내거나(from) 받는(to) 이동만 표시 — 그 매장과 무관한 다른 매장쌍 이동은 숨김
-    const visibleFlows = currentStore === 'all' ? item.flows : item.flows.filter(f => f.from === currentStore || f.to === currentStore);
+    // 매장을 골랐으면 그 매장이 "받는"(to) 이동만 표시 — 수신 매장 관점 (보내는 쪽 이동은 숨김)
+    const visibleFlows = currentStore === 'all' ? item.flows : item.flows.filter(f => f.to === currentStore);
     const flowsHtml = visibleFlows.length ? visibleFlows.map(flowChipHtml).join('') : '<span class="dim">–</span>';
     return (
       '<tr>' +
@@ -277,9 +277,9 @@
     return SNAPSHOT.items.filter((item) => {
       if (currentFilter === 'rt' && item.flows.length === 0) return false;
       if (currentStore !== 'all') {
-        // 매장을 고르면 그 매장이 보내거나 받는 RT 이동이 하나라도 있는 SKU만
-        const involved = item.flows.some(f => f.from === currentStore || f.to === currentStore);
-        if (!involved) return false;
+        // 매장을 고르면 그 매장이 "받는"(to) RT 이동이 있는 SKU만 — 수신 매장 관점
+        const receiving = item.flows.some(f => f.to === currentStore);
+        if (!receiving) return false;
       }
       if (!q) return true;
       const hay = (item.productName + ' ' + item.productCode + ' ' + (item.colorName || '') + ' ' + (item.styleName || '')).toLowerCase();

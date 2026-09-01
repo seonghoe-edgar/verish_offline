@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T10:34:48.988Z",
+  "generatedAt": "2026-09-01T10:47:22.330Z",
   "stockDate": "20260901",
   "salesWindow": {
     "from": "20260825",
@@ -187,6 +187,38 @@
           "sold7d": 2,
           "velocity": 0.2857142857142857,
           "daysOfStock": 66.5,
+          "risk": false
+        }
+      },
+      "flows": [
+        {
+          "from": "sinjeju",
+          "to": "aewol",
+          "qty": 4,
+          "note": ""
+        }
+      ]
+    },
+    {
+      "key": "VALPT0014__PASYE__L",
+      "productCode": "VALPT0014",
+      "productName": "쿨핏 팬티",
+      "colorName": "파스텔옐로우",
+      "sizeCode": "L",
+      "styleName": "팬티",
+      "storeData": {
+        "aewol": {
+          "stock": 1,
+          "sold7d": 5,
+          "velocity": 0.7142857142857143,
+          "daysOfStock": 1.4,
+          "risk": true
+        },
+        "sinjeju": {
+          "stock": 13,
+          "sold7d": 4,
+          "velocity": 0.5714285714285714,
+          "daysOfStock": 22.75,
           "risk": false
         }
       },
@@ -451,38 +483,6 @@
           "from": "aewol",
           "to": "sinjeju",
           "qty": 2,
-          "note": ""
-        }
-      ]
-    },
-    {
-      "key": "VALPT0014__PASYE__L",
-      "productCode": "VALPT0014",
-      "productName": "쿨핏 팬티",
-      "colorName": "파스텔옐로우",
-      "sizeCode": "L",
-      "styleName": "팬티",
-      "storeData": {
-        "aewol": {
-          "stock": 2,
-          "sold7d": 5,
-          "velocity": 0.7142857142857143,
-          "daysOfStock": 2.8,
-          "risk": true
-        },
-        "sinjeju": {
-          "stock": 13,
-          "sold7d": 4,
-          "velocity": 0.5714285714285714,
-          "daysOfStock": 22.75,
-          "risk": false
-        }
-      },
-      "flows": [
-        {
-          "from": "sinjeju",
-          "to": "aewol",
-          "qty": 3,
           "note": ""
         }
       ]
@@ -5165,11 +5165,11 @@
           "risk": false
         },
         "sinjeju": {
-          "stock": 2,
+          "stock": 1,
           "sold7d": 1,
           "velocity": 0.14285714285714285,
-          "daysOfStock": 14,
-          "risk": false
+          "daysOfStock": 7,
+          "risk": true
         }
       },
       "flows": []
@@ -9072,10 +9072,10 @@
       "styleName": "브라",
       "storeData": {
         "aewol": {
-          "stock": 10,
+          "stock": 9,
           "sold7d": 6,
           "velocity": 0.8571428571428571,
-          "daysOfStock": 11.666666666666668,
+          "daysOfStock": 10.5,
           "risk": false
         },
         "sinjeju": {
@@ -9647,10 +9647,10 @@
       "styleName": "브라",
       "storeData": {
         "aewol": {
-          "stock": 16,
+          "stock": 15,
           "sold7d": 3,
           "velocity": 0.42857142857142855,
-          "daysOfStock": 37.333333333333336,
+          "daysOfStock": 35,
           "risk": false
         },
         "sinjeju": {
@@ -9772,10 +9772,10 @@
       "styleName": "브라",
       "storeData": {
         "aewol": {
-          "stock": 16,
+          "stock": 15,
           "sold7d": 5,
           "velocity": 0.7142857142857143,
-          "daysOfStock": 22.4,
+          "daysOfStock": 21,
           "risk": false
         },
         "sinjeju": {
@@ -14154,7 +14154,7 @@
       "styleName": "브라",
       "storeData": {
         "aewol": {
-          "stock": 10,
+          "stock": 9,
           "sold7d": 0,
           "velocity": 0,
           "daysOfStock": null,
@@ -14254,10 +14254,10 @@
       "styleName": "브라",
       "storeData": {
         "aewol": {
-          "stock": 9,
+          "stock": 8,
           "sold7d": 3,
           "velocity": 0.42857142857142855,
-          "daysOfStock": 21,
+          "daysOfStock": 18.666666666666668,
           "risk": false
         },
         "sinjeju": {
@@ -17092,10 +17092,10 @@
       "styleName": "팬티",
       "storeData": {
         "aewol": {
-          "stock": 8,
+          "stock": 7,
           "sold7d": 2,
           "velocity": 0.2857142857142857,
-          "daysOfStock": 28,
+          "daysOfStock": 24.5,
           "risk": false
         },
         "sinjeju": {
@@ -17367,10 +17367,10 @@
       "styleName": "팬티",
       "storeData": {
         "aewol": {
-          "stock": 7,
+          "stock": 6,
           "sold7d": 1,
           "velocity": 0.14285714285714285,
-          "daysOfStock": 49,
+          "daysOfStock": 42,
           "risk": false
         },
         "sinjeju": {
@@ -23562,10 +23562,10 @@
           "risk": true
         },
         "sinjeju": {
-          "stock": 13,
+          "stock": 12,
           "sold7d": 5,
           "velocity": 0.7142857142857143,
-          "daysOfStock": 18.2,
+          "daysOfStock": 16.8,
           "risk": false
         }
       },
@@ -34418,10 +34418,10 @@
           "risk": false
         },
         "sinjeju": {
-          "stock": 10,
+          "stock": 9,
           "sold7d": 4,
           "velocity": 0.5714285714285714,
-          "daysOfStock": 17.5,
+          "daysOfStock": 15.75,
           "risk": false
         }
       },
@@ -41977,7 +41977,7 @@
       "storeData": {
         "aewol": null,
         "sinjeju": {
-          "stock": 18,
+          "stock": 17,
           "sold7d": 0,
           "velocity": 0,
           "daysOfStock": null,
