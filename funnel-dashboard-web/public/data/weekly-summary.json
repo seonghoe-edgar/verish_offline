@@ -9,5 +9,16 @@
     "aov": 68206,
     "avgAddCartRate": 9.75,
     "avgPurchaseRate": 3.55
+  },
+  {
+    "weekStart": "2026-09-14",
+    "weekEnd": "2026-09-20",
+    "sessions": 403776,
+    "validOrders": 6134,
+    "conversionRate": 1.519,
+    "revenue": 450007916,
+    "aov": 73363,
+    "avgAddCartRate": 9.64,
+    "avgPurchaseRate": 3.46
   }
 ]
