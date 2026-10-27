@@ -12,7 +12,7 @@ import { getTaxFreeInfo, type TaxFreeInfo } from "../endpoints/index.js";
 const FROM = process.argv[2];
 const TO = process.argv[3];
 if (!FROM || !TO) throw new Error("fromDate, toDate 필요 (yyyy-MM-dd)");
-const SHOPS = ["VRAGFS", "VRDSFS", "VRJAFS", "VRMDFS", "VRNJFS", "VRSSFS"];
+const SHOPS = ["VRAGFS", "VRDSFS", "VRJAFS", "VRMDFS", "VRNJFS", "VRSSFS", "VRESFS"];
 const NATIONS = ["TWN", "CHN", "USA", "AUS", "SGP", "JPN", "CAN", "MYS", "GBR"]; // 그 외는 OTHER
 const PERCENTILE = 0.95;
 const MIN_N = 200;
