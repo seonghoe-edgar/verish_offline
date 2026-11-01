@@ -79,7 +79,7 @@ def A(u, key):
 SEASON_REF = {  # 2025 이력이 성숙한 유닛
     "D2C_KR": ["cafe24_direct", "cafe24_naverpay_order"],
     "D2C_GL": ["shopify_HK", "shopify_TW"],
-    "MKT_KR": ["29cm", "musinsa", "zigzag", "ably", "smartstore", "kakao_gift", "oliveyoung_online", "lotte_dfs", "shilla_dfs"],
+    "MKT_KR": ["29cm", "musinsa", "zigzag", "ably", "smartstore", "kakao_gift", "lotte_dfs", "shilla_dfs"],
     "OFF": ["VRSSFS", "VRDSFS"],
 }
 by_id = {u["id"]: u for u in units}
@@ -307,7 +307,8 @@ notes = [
     "6) 상품라인 = 그룹 월 목표 × 라인 믹스. 신규 언더웨어는 현재 비중을 전 월에 유지(에센셜핏·노와이어 10월, 나머지 출시 후 평균), 아이스온·웜터치는 2026 월별 비중(시즌성),",
     "   단종·하락 라인(레이셋·착착·붐업 등)은 9~10월 비중 유지, 나머지(쿨핏 기존·티셔츠·미니멀·어패럴)는 잔여 비중을 2026 월별 비율로 배분.",
     "면세점: 2026년 1~9월은 Revenue Projection 시트 '2026 매출 달성'(VAT 제외) 기준. 롯데·신라 10월·2025년은 BQ×(7~9월 시트/BQ 비율), 신세계 10월=9월×롯데·신라 10월/9월 평균(추정).",
-    "주의: 국내 외부채널 상품 믹스는 면세점(롯데·신라·신세계)이 SKU 단위가 아니라 제외하고 산출 → 면세점도 같은 믹스로 가정. 해외 자사몰 믹스는 미국 제외 국가 합산 1개 믹스를 국가별 공통 적용.",
+    "주의: 국내 외부채널 상품 믹스는 면세점(롯데·신라·신세계)이 SKU 단위가 아니라 제외하고 산출 → 면세점도 같은 믹스로 가정. 해외 자사몰 믹스는 미국 제외 국가 합산 1개 믹스를 국가별 공통 적용. 올리브영 온라인은 목표에서 제외(매출 비중 1% 수준이라 믹스에는 잔존).",
+    "해외 국가 묶음: 마카오는 홍콩에, 뉴질랜드는 기타 국가에 합산.",
 ]
 for i, t in enumerate(notes):
     c = wa.cell(row=18 + i, column=1, value=t)
@@ -322,10 +323,10 @@ def g_ref(g):
 
 
 # 채널 고유 계절지수 (국내 자사몰·국내 외부채널)
-wa.cell(row=31, column=1, value="채널 고유 계절지수 (국내 자사몰·국내 외부채널: 채널별 2025·2026E 형태 평균, 12개월 평균 = 1.000)").font = BOLD
-hdr(wa, 32, ["채널"] + MLABEL)
+wa.cell(row=33, column=1, value="채널 고유 계절지수 (국내 자사몰·국내 외부채널: 채널별 2025·2026E 형태 평균, 12개월 평균 = 1.000)").font = BOLD
+hdr(wa, 34, ["채널"] + MLABEL)
 UNIT_IDX_ROW = {}
-r = 33
+r = 35
 for u in units:
     if u["group"] in OWN_IDX_GROUPS:
         wa.cell(row=r, column=1, value=u["name"]).font = BLACK
