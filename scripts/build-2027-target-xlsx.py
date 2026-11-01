@@ -129,6 +129,8 @@ for g, ids in IDX_REF.items():
 # 국내 자사몰·국내 외부채널은 채널마다 2개년 이력이 있어 채널 고유 계절지수(프로모션 달력·면세점 평탄성 반영)
 OWN_IDX_GROUPS = {"D2C_KR", "MKT_KR"}
 for u in units:
+    if u.get("idx_like"):
+        continue
     if u["group"] in OWN_IDX_GROUPS:
         a25 = [A(u, ym(2025, m)) for m in MONTHS]
         e26 = [u["e"][m] for m in MONTHS]
@@ -137,6 +139,10 @@ for u in units:
         u["idx"] = [(x + y) / 2 for x, y in zip(s25, s26)]
     else:
         u["idx"] = idx[u["group"]]
+for u in units:  # 2025 이력 없는 채널(신세계면세점) → 유사 채널 지수 평균
+    if u.get("idx_like"):
+        refs = [by_id[i]["idx"] for i in u["idx_like"]]
+        u["idx"] = [sum(v) / len(v) for v in zip(*refs)]
 
 # ---------------- 4) 기준 월평균 D (신규 어패럴 제외) ----------------
 new_app = data["new_apparel_sep_oct"]
@@ -300,7 +306,8 @@ notes = [
     "5) 신규 매장(명동·하남·동부산·신제주·애월·동성수)은 2026년 공백 월도 run-rate × 계절지수로 채워 12개월 운영을 가정(연환산). 팝업은 2027 계획 확정 시 별도 추가.",
     "6) 상품라인 = 그룹 월 목표 × 라인 믹스. 신규 언더웨어는 현재 비중을 전 월에 유지(에센셜핏·노와이어 10월, 나머지 출시 후 평균), 아이스온·웜터치는 2026 월별 비중(시즌성),",
     "   단종·하락 라인(레이셋·착착·붐업 등)은 9~10월 비중 유지, 나머지(쿨핏 기존·티셔츠·미니멀·어패럴)는 잔여 비중을 2026 월별 비율로 배분.",
-    "주의: 국내 외부채널 상품 믹스는 면세점(롯데·신라)이 SKU 단위가 아니라 제외하고 산출 → 면세점도 같은 믹스로 가정. 해외 자사몰 믹스는 미국 제외 국가 합산 1개 믹스를 국가별 공통 적용.",
+    "면세점: 2026년 1~9월은 Revenue Projection 시트 '2026 매출 달성'(VAT 제외) 기준. 롯데·신라 10월·2025년은 BQ×(7~9월 시트/BQ 비율), 신세계 10월=9월×롯데·신라 10월/9월 평균(추정).",
+    "주의: 국내 외부채널 상품 믹스는 면세점(롯데·신라·신세계)이 SKU 단위가 아니라 제외하고 산출 → 면세점도 같은 믹스로 가정. 해외 자사몰 믹스는 미국 제외 국가 합산 1개 믹스를 국가별 공통 적용.",
 ]
 for i, t in enumerate(notes):
     c = wa.cell(row=18 + i, column=1, value=t)
